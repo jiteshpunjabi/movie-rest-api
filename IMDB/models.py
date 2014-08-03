@@ -21,7 +21,7 @@ class Genre(models.Model):
 
 
 class MovieManager(models.Manager):
-    def get_movies(self, no_per_page=20, page_no=1,field="name", query=""):
+    def get_movies(self, no_per_page=20, page_no=1,field="", query=""):
         query_set=[]
         if field == "genre":
             _genre = query.split("+") #cleanse the genre set given

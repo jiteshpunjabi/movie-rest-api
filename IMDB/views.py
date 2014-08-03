@@ -5,7 +5,7 @@ from django.db import IntegrityError
 import json, os
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import PermissionDenied
-from models import Movie
+from models import Movie, Genre
 from apiAuth import has_perm, access_required
 
 # Create your views here.
@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 logger.addHandler(logging.NullHandler())
 
 @csrf_exempt
-@access_required
+#@access_required
 def get_movie(request, pk):
     """
     function to handle request for a particular movie
@@ -104,7 +104,7 @@ def search_movie(request):
     except (Movie.DoesNotExist, Http404):
         return HttpResponseNotFound(json.dumps({'status': 404, 'message': 'movie not found'}),
                                     content_type="application/json")
-@access_required
+#@access_required
 def get_movie_page(request, page_no):
     return HttpResponse(Movie.objects.get_movies(20, page_no=int(page_no)),
                         content_type="application/json")

@@ -14,7 +14,7 @@ def do_register_user(request):
     mail_id = request.POST.get('mailid',None)
     try:
         if username is not None and password is not None and mail_id is not None:
-            User.objects.create_user(username,email=mail_id, password=password)
+            User.objects.create_user(username, email=mail_id, password=password)
             return login_with_token(request)
         else:
             raise AttributeError()
@@ -40,7 +40,8 @@ def login_with_token(request):
                     role = "user"
                     if user.is_staff:
                         role = 'admin'
-                    _dict = {'username': username, 'token': token.__unicode__(), 'role':role }
+                    _dict = {'username': username, 'token': token.reset_token()[0], 'role': role }
+                    token.save()
                     return HttpResponse(json.dumps(_dict), content_type="application/json")
                 else:
                     raise PermissionDenied()

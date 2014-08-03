@@ -27,9 +27,9 @@ class addMovieTest(unittest.TestCase):
     def test_login_with_token(self):
         client = Client()
         #first try without registering, should return 403 permission denied
-        response=client.post(reverse("movie:auth_login"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
+        response=client.post(reverse("auth_login"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
         self.assertEqual(response.status_code,403)
-        response = client.post(reverse("movie:auth_register"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
+        response = client.post(reverse("auth_register"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
         self.assertEqual(response.status_code,200)
-        response=client.post(reverse("movie:auth_login"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
+        response=client.post(reverse("auth_login"),data={'username':'jitesh','mail_id':'abc@abc.com','password':'password'})
         self.assertEqual(response.status_code,200)

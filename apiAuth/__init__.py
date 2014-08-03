@@ -1,9 +1,12 @@
 from django.http import HttpResponseForbidden
 from models import Token
-from functools import wraps
 import json
 
+"""
 
+use is deprecated.....include the middleware instead.
+
+"""
 def has_perm(request, permission):
     api_key = get_api_key(request)
     if api_key is not None:
